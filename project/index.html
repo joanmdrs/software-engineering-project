@@ -5,10 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Banco AN</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/initial.css">
+    <link rel="stylesheet" href="/css/clients-list.css">
     <link rel="icon" href="https://cdn2.iconfinder.com/data/icons/business-489/32/business-06-128.png">
-    <script src="clients-module.js" defer></script>
-
 </head>
 <body>
     <header>
@@ -24,135 +23,17 @@
             <button id='list-clients' class='list-clients'> Clientes </button>
         </div>
 
-        <div>
-            <form id='client-add-form' class='client-add-form'>
-                
-                <div class="label">
-                    <label style="margin-right: 230px;">Nome completo:</label>
-                    <label>CPF:</label>
-                    <label>RG:</label>
-                </div>
-                
-                <div class="input">
-                    <input class='field' type='text' id='name-field' placeholder='Informe seu nome' style="width: 430px;" required>
-                    <input class='field' type='text' id='cpf-field' placeholder='Informe seu CPF' required>
-                    <input class='field' type='text' id='rg-field' placeholder='Informe seu RG' required>
-                </div>
-                <div class="label">
-                    <label>Data de nascimento:</label>
-                    <label>Idade:</label>
-                    <label>Estado Civil:</label>
-                    <label>Sexo:</label>
-                </div>
-                <div class="input">
-                    <input class='field' type="date" id='dt-field' placeholder='Data Nascimento' required>
-                    <input class='field' disabled>
-                    <select class='field' id='ms-field' required>
-                        <option disabled selected>-- Escolha uma opção</option>
-                        <option value="Solteiro (a)">Solteiro (a)</option>
-                        <option value="Casado (a)">Casado (a)</option>
-                        <option value="Separado (a)">Separado (a)</option>
-                        <option value="Divorciado (a)">Divorciado (a)</option>
-                        <option value="Viúvo (a)">Viúvo (a)</option>
-                    </select>
-                    <select class='field' id='sexo-field' required>
-                        <option disabled selected>-- Escolha uma opção</option>
-                        <option value="Masculino">Masculino</option>
-                        <option value="Feminino">Feminino</option>
-                    </select>
-                </div>
-                <div class="label">
-                    <label>Escolaridade:</label>
-                    <label>Telefone:</label>
-                    <label>E-mail:</label>
-                </div>
-                <div class="input">
-                    <select class='field' id='schooling-field' required>
-                        <option disabled selected>-- Escolha uma opção</option>
-                        <option value="Analfabeto (a)">Doutorado</option>
-                        <option value="Ensino Fundamental">Ensino Fundamental</option>
-                        <option value="Ensino Médio">Ensino Médio</option>
-                        <option value="Ensino Superior">Ensino Superior</option>
-                        <option value="Pós Graduação">Pós Graduação</option>
-                        <option value="Mestrado">Mestrado</option>
-                        <option value="Doutorado">Doutorado</option>
-                        <option value="Pós Doutorado">Doutorado</option>
-
-                    </select>
-                    <input class='field' type='text' id='phone-field' required>
-                    <input class='field' type="email" id='email-field' required>
-                </div>
-                <div class="label">
-                    <label>Endereço:</label>
-                    <label>Bairro:</label>
-                    <label>Número:</label>
-                </div>
-                <div class="input">
-                    <input class='field' type="text" id="address-field" required>
-                    <input class='field' type="text" id='district-field' required>
-                    <input class='field' type="number" id='number-field' required>
-                </div>
-                <div class="label">
-                    <label>CEP:</label>
-                    <label>Cidade:</label>
-                    <label>UF:</label>
-                </div>
-                <div class="input">
-                    <input class='field' type="text" id='cep-field' required>
-                    <input class='field' type="text" id='city-field' required>
-                    <select class="field" id="uf-field" required>
-                        <option disabled selected>-- Escolha uma opção</option>
-                        <option value="AC">Acre</option>
-                        <option value="AL">Alagoas</option>
-                        <option value="AP">Amapá</option>
-                        <option value="AM">Amazonas</option>
-                        <option value="BA">Bahia</option>
-                        <option value="CE">Ceará</option>
-                        <option value="DF">Distrito Federal</option>
-                        <option value="ES">Espírito Santo</option>
-                        <option value="GO">Goiás</option>
-                        <option value="MA">Maranhão</option>
-                        <option value="MT">Mato Grosso</option>
-                        <option value="MS">Mato Grosso do Sul</option>
-                        <option value="MG">Minas Gerais</option>
-                        <option value="PA">Pará</option>
-                        <option value="PB">Paraíba</option>
-                        <option value="PR">Paraná</option>
-                        <option value="PE">Pernambuco</option>
-                        <option value="PI">Piauí</option>
-                        <option value="RJ">Rio de Janeiro</option>
-                        <option value="RN">Rio Grande do Norte</option>
-                        <option value="RS">Rio Grande do Sul</option>
-                        <option value="RO">Rondônia</option>
-                        <option value="RR">Roraima</option>
-                        <option value="SC">Santa Catarina</option>
-                        <option value="SP">São Paulo</option>
-                        <option value="SE">Sergipe</option>
-                        <option value="TO">Tocantins</option>
-                    </select>
-                </div>
-                <div class="label">
-                    <label>Ocupação profissional:</label>
-                    <label>Cargo:</label>
-                    <label>Salário:</label>
-                </div>
-                <div class="input">
-                    <input class='field' type="text" id='po-field' required>
-                    <input class='field' type="text" id='office-field' required>
-                    <input class='field' type='number' id='income-field' step="0.01" required>
-                </div>
-                <div class="button-save-cancel-clear">
-                    <button id='button-clear' class="button-clear" type="button">Limpar</button>
-                    <button id='button-cancel' class="button-cancel" type="button">Cancelar</button>
-                    <button id='button-save' class="button-save" type="button">Salvar</button>
-                </div>
-            </form>
+        <div id="principal" class="principal"> 
         </div>
     </main>
 
-    <footer>
+    <footer class="footer">
         Desenvolvido por Allan Oliveira, Joan Medeiros e Rauan Araújo.
     </footer>
+
+    <script src="module-create.js"></script>
+    <script src="module-list.js"></script>
+
     
 </body>
 </html>
