@@ -28,6 +28,7 @@ const createTableSearch = () => {
       <th>Renda</th>
       <th>Conta</th>
       <th>Status</th>
+      <th>Ações</th>
     </tr>
   `
   table.appendChild(thead)
@@ -64,6 +65,17 @@ const createRowSearch = (client) => {
       <td>${client.type_conta}</td>
       <td>${client.status}</td>
     `
+    const td = document.createElement('td')
+    const button = document.createElement('button')
+    button.type = 'submit'
+    button.innerText = 'Editar'
+    button.classList.add("button-edit")
+    button.addEventListener('click', function(event){
+        event.preventDefault()
+        generateFormEdit(client.cpf)
+    })
+    td.append(button)
+    newRow.append(td)
     return newRow
   }
 }
