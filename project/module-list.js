@@ -9,12 +9,15 @@ const createTable = () => {
             <th>Telefone</th>
             <th>Email</th>
             <th>Renda</th>
+            <th>Conta</th>
+            <th>Status</th>
             <th>Ações</th>
         </tr>
     `
     table.appendChild(thead)
     const tbody = createTbody()
     table.appendChild(tbody)
+    document.getElementById('principal').innerHTML = ' ';
     document.getElementById('principal').appendChild(table)
 }
 
@@ -39,6 +42,8 @@ const createRow = (client) => {
         <td>${client.phone}</td>
         <td>${client.email}</td>
         <td>${client.income}</td>
+        <td>${client.type_conta}</td>
+        <td>${client.status}</td>
         <td>
             <button type="button" class="button-edit" id='${client.cpf}'>editar</button>
         </td>
@@ -48,8 +53,8 @@ const createRow = (client) => {
 }
 
 const listClients = () => {
+    
     createTable()
-   
 }
 
 document.querySelector('#list-clients')

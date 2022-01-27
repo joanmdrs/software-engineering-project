@@ -48,6 +48,7 @@ const generateFormAdd = () => {
                 <label>Escolaridade:</label>
                 <label>Telefone:</label>
                 <label>E-mail:</label>
+                <label>Tipo da Conta:</label>
             </div>
             <div class="input">
                 <select class='field' id='schooling-field' required>
@@ -64,6 +65,14 @@ const generateFormAdd = () => {
                 </select>
                 <input class='field' type='text' id='phone-field' required>
                 <input class='field' type="email" id='email-field' required>
+
+                <select class='field' id='type-field' required>
+                    <option disabled selected>-- Escolha uma opção</option>
+                    <option value="Corrente">Conta Corrente</option>
+                    <option value="Poupança">Conta Poupança</option>
+                    <option value="Conjunta">Conta Conjunta</option>
+                </select>
+
             </div>
             <div class="label">
                 <label>Endereço:</label>
@@ -130,7 +139,6 @@ const generateFormAdd = () => {
                 <button id='button-save' class="button-save" type="button" onClick='addClient()'>Salvar</button>
             </div>
         </form>`
-
 }
 
 const createClient = (client) => {
@@ -150,6 +158,7 @@ const addClient = () => {
             age: getAge(document.querySelector('#dt-field').value),
             marital_status: document.querySelector('#ms-field').value,
             sexo: document.querySelector('#sexo-field').value,
+            type_conta: document.querySelector('#type-field').value,
             schooling: document.querySelector('#schooling-field').value,
             phone: document.querySelector('#phone-field').value,
             email: document.querySelector('#email-field').value,
@@ -161,7 +170,8 @@ const addClient = () => {
             uf: document.querySelector('#uf-field').value,
             professional_occupation: document.querySelector('#po-field').value,
             office: document.querySelector('#office-field').value,
-            income: document.querySelector('#income-field').value
+            income: document.querySelector('#income-field').value,
+            status: 'Ativo'
         }
 
         createClient(client)

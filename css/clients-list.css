@@ -1,9 +1,8 @@
 table {
     margin-top: 20px;
+    margin-bottom: 20px;
     border-collapse: collapse;
     width: 75%;
-
-
 }
 
 table thead{
