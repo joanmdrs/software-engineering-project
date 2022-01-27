@@ -8,7 +8,7 @@ const isValidFields = () => {
 const generateFormAdd = () => {
     const div = document.getElementById('principal')
     div.innerHTML = `
-        <form id='client-add-form' class='client-add-form'>
+        <form id='client-add-form' class='client-add-form' data-action='new'>
                 
             <div class="label">
                 <label style="margin-right: 230px;">Nome completo:</label>
@@ -136,7 +136,7 @@ const generateFormAdd = () => {
             <div class="button-save-cancel-clear">
                 <button id='button-clear' class="button-clear" type="button" onClick='clearFields()'>Limpar</button>
                 <button id='button-cancel' class="button-cancel" type="button" onClick='closeForm()'>Cancelar</button>
-                <button id='button-save' class="button-save" type="button" onClick='addClient()'>Salvar</button>
+                <button id='button-save' class="button-save" type="button" onClick='saveClient()'>Salvar</button>
             </div>
         </form>`
 }
@@ -147,7 +147,7 @@ const createClient = (client) => {
     setLocalStorage(dbclient)
 }
 
-const addClient = () => {
+const saveClient = () => {
 
     if(isValidFields()){
         const client = {
@@ -174,16 +174,21 @@ const addClient = () => {
             status: 'Ativo'
         }
 
-        createClient(client)
-        closeForm()
+        const action = document.querySelector('#client-add-form').dataset.action
+
+        if(action == 'new'){
+            createClient(client)
+            closeForm()
+        }else{
+            updateClient(client, action)
+            closeForm()
+        }
         
     }else {
         alert("Preencha os campos corretamente")
     }
 }
 
-
-// Função que calcula a idade 
 const getAge = (data) => {
     const  year = parseInt(data.substring(0,4))
     const  month = parseInt(data.substring(5,7))
@@ -207,8 +212,6 @@ const readClient = () => getLocalStorage()
 
 const closeForm = () => {
     clearFields()
-    const footer = document.querySelector('.footer')
-    footer.classList.toggle('toogle')
     document.querySelector('#principal').innerHTML = ``
 }
 
@@ -219,8 +222,6 @@ const clearFields = () => {
 
 const openForm = () => {
     generateFormAdd()
-    const footer = document.querySelector('.footer')
-    footer.classList.toggle('toogle')
 }
 
 document.querySelector('#add-client')

@@ -44,11 +44,18 @@ const createRow = (client) => {
         <td>${client.income}</td>
         <td>${client.type_conta}</td>
         <td>${client.status}</td>
-        <td>
-            <button type="button" class="button-edit" id='${client.cpf}'>editar</button>
-        </td>
     `
-
+    const td = document.createElement('td')
+    const button = document.createElement('button')
+    button.type = 'submit'
+    button.innerText = 'Editar'
+    button.classList.add("button-edit")
+    button.addEventListener('click', function(event){
+        event.preventDefault()
+        generateFormEdit(client.cpf)
+    })
+    td.append(button)
+    newRow.append(td)
     return newRow
 }
 

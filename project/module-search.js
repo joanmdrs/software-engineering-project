@@ -70,8 +70,6 @@ const createRowSearch = (client) => {
 
 const closeFormSearch = () => {
   clearFieldsSearch()
-  const footer = document.querySelector('.footer')
-  footer.classList.toggle('toogle')
   document.querySelector('#principal').innerHTML = ``
 }
 
@@ -82,30 +80,43 @@ const clearFieldsSearch = () => {
 
 const openFormSearch = () => {
   generateFormSearch()
-  const footer = document.querySelector('.footer')
-  footer.classList.toggle('toogle')
+
 }
 
-// const errorCliente = () => {
-//   const div = document.getElementsById('principal');
-//   div.innerHTML = 'Cliente não encontrado!';
-// }
+const messageError = () => {
+  const div = document.createElement('div')
+  div.classList.add('message-error')
+
+  div.innerHTML = `
+    <p> Não foi encontrado nenhum cliente com o CPF informado </p>
+  `
+  document.querySelector('#principal').innerHTML = ''
+  document.querySelector('#principal').appendChild(div)
+  
+}
 
 const searchClients = () => {
   const cpf = document.getElementById('cpf-field').value;
   const dbClient = readClient()
   let cont = 0;
-  dbClient.forEach(client => {
+  if(cpf == '' || cpf.length < 14){
+    alert('Preencha o campo buscar corretamente !')
+  }else{
+    dbClient.forEach(client => {
       if(cpf == client.cpf){
         cont += 1;
       }
-  });
-  if(cont >= 1){
-    createTableSearch()
-  } else{
-    //errorCliente()
+    });
+    if(cont >= 1){
+      createTableSearch()
+    }else if(cont == 0){
+      messageError()
+    }
   }
+  
+
 }
 
 document.querySelector('#search-client')
   .addEventListener('click', openFormSearch)
+
