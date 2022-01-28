@@ -99,7 +99,7 @@ const searchClientsDesativate = () => {
     alert('Preencha o campo com seu CPF usando "." e "-"  Ex: 123.456.789-10')
   }else{
     dbClient.forEach(client => {
-      if(cpf == client.cpf){
+      if(cpf == client.cpf & client.status == "Ativo"){
         cont += 1;
       }
     });

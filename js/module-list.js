@@ -54,7 +54,13 @@ const createRow = (client) => {
         event.preventDefault()
         generateFormEdit(client.cpf)
     })
-    td.append(button)
+    if(client.status == "Ativo"){
+        td.append(button)
+    } else{
+        const non = document.createElement('a')
+        non.innerHTML = "---"
+        td.append(non)
+    }
     newRow.append(td)
     return newRow
 }

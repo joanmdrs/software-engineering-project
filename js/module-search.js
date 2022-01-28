@@ -44,7 +44,7 @@ const createTbodySearch = () => {
   const cpf = document.getElementById('cpf-field').value;
   const dbClient = readClient()
   dbClient.forEach(client => {
-      if(cpf == client.cpf & client.status == "Ativo"){
+      if(cpf == client.cpf){
         let tr = createRowSearch(client)
         tbody.appendChild(tr)
       }
@@ -116,7 +116,7 @@ const searchClients = () => {
     alert('Preencha o campo com seu CPF usando "." e "-"  Ex: 123.456.789-10')
   }else{
     dbClient.forEach(client => {
-      if(cpf == client.cpf){
+      if(cpf == client.cpf & client.status == "Ativo"){
         cont += 1;
       }
     });
