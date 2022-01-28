@@ -1,9 +1,6 @@
+
 const getLocalStorage = () => JSON.parse(localStorage.getItem('db_client')) ?? []
 const setLocalStorage = (dbclient) => localStorage.setItem('db_client',  JSON.stringify(dbclient))
-
-const isValidFields = () => {
-    return document.querySelector('#client-add-form').reportValidity()
-}
 
 const generateFormAdd = () => {
     const div = document.getElementById('principal')
@@ -18,7 +15,7 @@ const generateFormAdd = () => {
             
             <div class="input">
                 <input class='field' type='text' id='name-field' placeholder='Informe seu nome' style="width: 430px;" required>
-                <input class='field' type='text' id='cpf-field' placeholder='Informe seu CPF' required>
+                <input class='field' type='text' id='cpf-field' placeholder='Informe seu CPF' maxlength='14' required>
                 <input class='field' type='text' id='rg-field' placeholder='Informe seu RG' required>
             </div>
             <div class="label">
@@ -28,8 +25,8 @@ const generateFormAdd = () => {
                 <label>Sexo:</label>
             </div>
             <div class="input">
-                <input class='field' type="date" id='dt-field' placeholder='Data Nascimento' required>
-                <input class='field' disabled>
+                <input class='field' type="date" id='dt-field' placeholder='Data Nascimento' onChange='setAgeField()' required>
+                <input class='field' id='age-field' disabled>
                 <select class='field' id='ms-field' required>
                     <option disabled selected>-- Escolha uma opção</option>
                     <option value="Solteiro (a)">Solteiro (a)</option>
@@ -53,18 +50,18 @@ const generateFormAdd = () => {
             <div class="input">
                 <select class='field' id='schooling-field' required>
                     <option disabled selected>-- Escolha uma opção</option>
-                    <option value="Analfabeto (a)">Doutorado</option>
+                    <option value="Analfabeto (a)">Analfabeto (a)</option>
                     <option value="Ensino Fundamental">Ensino Fundamental</option>
                     <option value="Ensino Médio">Ensino Médio</option>
                     <option value="Ensino Superior">Ensino Superior</option>
                     <option value="Pós Graduação">Pós Graduação</option>
                     <option value="Mestrado">Mestrado</option>
                     <option value="Doutorado">Doutorado</option>
-                    <option value="Pós Doutorado">Doutorado</option>
+                    <option value="Pós Doutorado">Pós Doutorado</option>
 
                 </select>
-                <input class='field' type='text' id='phone-field' required>
-                <input class='field' type="email" id='email-field' required>
+                <input class='field' type='text' id='phone-field' placeholder='(00) 00000-0000' required>
+                <input class='field' type="email" id='email-field' placeholder='E-mail ' required>
 
                 <select class='field' id='type-field' required>
                     <option disabled selected>-- Escolha uma opção</option>
@@ -141,6 +138,10 @@ const generateFormAdd = () => {
         </form>`
 }
 
+const isValidFields = () => {
+    return document.querySelector('#client-add-form').reportValidity()
+}
+
 const createClient = (client) => {
     const dbclient = getLocalStorage()
     dbclient.push(client)
@@ -155,7 +156,7 @@ const saveClient = () => {
             cpf: document.querySelector('#cpf-field').value,
             rg: document.querySelector('#rg-field').value,
             birth_date: document.querySelector('#dt-field').value,
-            age: getAge(document.querySelector('#dt-field').value),
+            age: document.querySelector('#age-field').value,
             marital_status: document.querySelector('#ms-field').value,
             sexo: document.querySelector('#sexo-field').value,
             type_conta: document.querySelector('#type-field').value,
@@ -178,9 +179,11 @@ const saveClient = () => {
 
         if(action == 'new'){
             createClient(client)
+            alert('Cliente salvo com sucesso!')
             closeForm()
         }else{
             updateClient(client, action)
+            confirm('Cliente atualizado com sucesso!')
             closeForm()
         }
         
@@ -189,6 +192,14 @@ const saveClient = () => {
     }
 }
 
+
+
+const setAgeField = () => {
+    const dt = document.querySelector('#dt-field').value 
+    const age = getAge(dt)
+    document.querySelector('#age-field').value = age
+
+}
 const getAge = (data) => {
     const  year = parseInt(data.substring(0,4))
     const  month = parseInt(data.substring(5,7))
@@ -209,7 +220,6 @@ const getAge = (data) => {
 
 const readClient = () => getLocalStorage()
 
-
 const closeForm = () => {
     clearFields()
     document.querySelector('#principal').innerHTML = ``
@@ -224,6 +234,4 @@ const openForm = () => {
     generateFormAdd()
 }
 
-document.querySelector('#add-client')
-    .addEventListener('click', openForm)
-
+document.querySelector('#add-client').addEventListener('click', openForm)
