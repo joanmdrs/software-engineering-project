@@ -1,4 +1,4 @@
-const generateFormSearch = () => {
+const generateFormDesativate = () => {
   document.getElementById('principal').innerHTML = `
     <form id='client-add-form' class='client-add-form'>       
         <div class="input">
@@ -8,14 +8,24 @@ const generateFormSearch = () => {
         <div class="button-save-cancel-clear">
             <button id='button-clear' class="button-clear" type="button" onClick='clearFields()'>Limpar</button>
             <button id='button-cancel' class="button-cancel" type="button" onClick='closeForm()'>Cancelar</button>
-            <button id='button-search' class="button-search" type="button" onClick='searchClients()'>Buscar</button>
+            <button id='button-search' class="button-search" type="button" onClick='searchClientsDesativate()'>Buscar</button>
         </div>
     </form>
   `
 }
 
+const desativateClient = (cpf) => {
+  const index = getClient(cpf)
+  const dbClient = readClient()
+  const client = dbClient[index]
+  client.status = "Desativado"
+  updateClient(client, index)
+  confirm('Cliente desativado com sucesso!')
+  document.getElementById('principal').innerHTML = '';
+}
 
-const createTableSearch = () => {
+
+const createTableDesativate = () => {
   const table = document.createElement('table')
   const thead = document.createElement('thead')
   thead.innerHTML = `
@@ -32,26 +42,26 @@ const createTableSearch = () => {
     </tr>
   `
   table.appendChild(thead)
-  const tbody = createTbodySearch()
+  const tbody = createTbodyDesativate()
   table.appendChild(tbody)
   document.getElementById('principal').innerHTML = ' ';
   document.getElementById('principal').appendChild(table)
 }
 
-const createTbodySearch = () => {
+const createTbodyDesativate = () => {
   const tbody = document.createElement('tbody')
   const cpf = document.getElementById('cpf-field').value;
   const dbClient = readClient()
   dbClient.forEach(client => {
       if(cpf == client.cpf){
-        let tr = createRowSearch(client)
+        let tr = createRowDesativate(client)
         tbody.appendChild(tr)
       }
   });
   return tbody
 }
 
-const createRowSearch = (client) => {
+const createRowDesativate = (client) => {
   const cpf = document.getElementById('cpf-field').value;
   if(cpf == client.cpf){
     const newRow = document.createElement('tr')
@@ -68,11 +78,11 @@ const createRowSearch = (client) => {
     const td = document.createElement('td')
     const button = document.createElement('button')
     button.type = 'submit'
-    button.innerText = 'Editar'
+    button.innerText = 'Desativar'
     button.classList.add("button-edit")
     button.addEventListener('click', function(event){
         event.preventDefault()
-        generateFormEdit(client.cpf)
+        desativateClient(client.cpf)
     })
     td.append(button)
     newRow.append(td)
@@ -80,34 +90,7 @@ const createRowSearch = (client) => {
   }
 }
 
-const closeFormSearch = () => {
-  clearFieldsSearch()
-  document.querySelector('#principal').innerHTML = ``
-}
-
-const clearFieldsSearch = () => {
-  const fields = document.querySelectorAll('.field')
-  fields.forEach(field => field.value = "")
-}
-
-const openFormSearch = () => {
-  generateFormSearch()
-}
-
-const messageError = () => {
-  const div = document.createElement('div')
-  div.classList.add('message-error')
-
-  div.innerHTML = `
-    <p> Não foi encontrado nenhum cliente com o CPF informado. </p>
-    <button id='button-search' class="button-search" type="button" onClick='openFormSearch()'>Buscar Novamente</button>
-  `
-  document.querySelector('#principal').innerHTML = ''
-  document.querySelector('#principal').appendChild(div)
-  
-}
-
-const searchClients = () => {
+const searchClientsDesativate = () => {
   const cpf = document.getElementById('cpf-field').value;
   const dbClient = readClient()
   let cont = 0;
@@ -120,13 +103,17 @@ const searchClients = () => {
       }
     });
     if(cont >= 1){
-      createTableSearch()
+      createTableDesativate()
     }else if(cont == 0){
       messageError()
     }
   }
 }
 
-document.querySelector('#search-client')
-  .addEventListener('click', openFormSearch)
+const openFormDesativate = () => {
+  generateFormDesativate()
+}
+
+document.querySelector('#desativate-client')
+  .addEventListener('click', openFormDesativate)
 

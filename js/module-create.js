@@ -15,7 +15,7 @@ const generateFormAdd = () => {
             
             <div class="input">
                 <input class='field' type='text' id='name-field' placeholder='Informe seu nome' style="width: 430px;" required>
-                <input class='field' type='text' id='cpf-field' placeholder='Informe seu CPF' maxlength='14' required>
+                <input class='field' type='text' id='cpf-field' placeholder='XXX.XXX.XXX-XX' maxlength='14' required>
                 <input class='field' type='text' id='rg-field' placeholder='Informe seu RG' required>
             </div>
             <div class="label">
@@ -67,7 +67,7 @@ const generateFormAdd = () => {
                     <option disabled selected>-- Escolha uma opção</option>
                     <option value="Corrente">Conta Corrente</option>
                     <option value="Poupança">Conta Poupança</option>
-                    <option value="Conjunta">Conta Conjunta</option>
+                    <option value="Salário">Conta Salário</option>
                 </select>
 
             </div>
