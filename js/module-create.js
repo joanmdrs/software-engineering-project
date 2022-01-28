@@ -178,9 +178,22 @@ const saveClient = () => {
         const action = document.querySelector('#client-add-form').dataset.action
 
         if(action == 'new'){
-            createClient(client)
-            alert('Cliente salvo com sucesso!')
-            closeForm()
+            const cpf = document.getElementById('cpf-field').value;
+            const dbClient = readClient()
+            let cont = 0;
+            dbClient.forEach(client => {
+                if(cpf == client.cpf){
+                  cont += 1;
+                }
+              });
+              if(cont >= 1){
+                alert('Já existe um cliente cadastrado com este CPF')
+              }else if(cont == 0){
+                createClient(client)
+                alert('Cliente salvo com sucesso!')
+                closeForm()
+              }
+                
         }else{
             updateClient(client, action)
             confirm('Cliente atualizado com sucesso!')

@@ -1,8 +1,9 @@
 const generateFormDesativate = () => {
   document.getElementById('principal').innerHTML = `
-    <form id='client-add-form' class='client-add-form'>       
+    <form id='client-add-form' class='client-add-form'>
+        <label>CPF:</label>       
         <div class="input">
-            <input class='field' type='text' id='cpf-field' placeholder='Informe seu CPF' required>
+            <input class='field' type='text' id='cpf-field' placeholder='XXX.XXX.XXX-XX' required>
         </div>
 
         <div class="button-save-cancel-clear">
@@ -95,7 +96,7 @@ const searchClientsDesativate = () => {
   const dbClient = readClient()
   let cont = 0;
   if(cpf == '' || cpf.length < 14){
-    alert('Preencha o campo buscar corretamente !')
+    alert('Preencha o campo com seu CPF usando "." e "-"  Ex: 123.456.789-10')
   }else{
     dbClient.forEach(client => {
       if(cpf == client.cpf){
