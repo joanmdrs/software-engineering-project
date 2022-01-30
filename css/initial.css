@@ -62,7 +62,7 @@ header h3 {
     margin: 50px 170px 50px 170px;
     padding: 40px;
     box-shadow: 10px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 12px;
+    border-radius: 5px;
     background-color: #C4C4C4;
     gap: 10px;
 }
@@ -121,9 +121,9 @@ header h3 {
 
 
 .button-save-cancel-clear button:hover {
-    background-color: #C4C4C4;
-    color: #000000;
-    border: 1px solid #000000;
+    background-color: #04B486;
+    color: #FFFFFF;
+    border: none;
     box-shadow: none;
     font-weight: lighter;
     transition-duration: 0.5s;

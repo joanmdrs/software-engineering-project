@@ -151,6 +151,7 @@ const createClient = (client) => {
 const saveClient = () => {
 
     if(isValidFields()){
+        const account = createAccount()
         const client = {
             name: document.querySelector('#name-field').value,
             cpf: document.querySelector('#cpf-field').value,
@@ -159,7 +160,6 @@ const saveClient = () => {
             age: document.querySelector('#age-field').value,
             marital_status: document.querySelector('#ms-field').value,
             sexo: document.querySelector('#sexo-field').value,
-            type_conta: document.querySelector('#type-field').value,
             schooling: document.querySelector('#schooling-field').value,
             phone: document.querySelector('#phone-field').value,
             email: document.querySelector('#email-field').value,
@@ -172,7 +172,8 @@ const saveClient = () => {
             professional_occupation: document.querySelector('#po-field').value,
             office: document.querySelector('#office-field').value,
             income: document.querySelector('#income-field').value,
-            status: 'Ativo'
+            account: account,
+            status: true
         }
 
         const action = document.querySelector('#client-add-form').dataset.action

@@ -35,6 +35,7 @@ const createTbody = () => {
 
 const createRow = (client) => {
     const newRow = document.createElement('tr')
+    const status = client.status == true ? 'ativo' : 'desativado'
     newRow.innerHTML = `
         <td>${client.cpf}</td>
         <td>${client.name}</td>
@@ -42,8 +43,8 @@ const createRow = (client) => {
         <td>${client.phone}</td>
         <td>${client.email}</td>
         <td>${client.income}</td>
-        <td>${client.type_conta}</td>
-        <td>${client.status}</td>
+        <td>${client.account.type}</td>
+        <td>${status}</td>
     `
     const td = document.createElement('td')
     const button = document.createElement('button')
@@ -54,7 +55,7 @@ const createRow = (client) => {
         event.preventDefault()
         generateFormEdit(client.cpf)
     })
-    if(client.status == "Ativo"){
+    if(client.status == true){
         td.append(button)
     } else{
         const non = document.createElement('a')
