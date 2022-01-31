@@ -1,3 +1,11 @@
+const createButton = (classe, type, text) => {
+    const button = document.createElement('button')
+    button.type = type
+    button.classList.add(classe)
+    button.innerText = text
+    return button
+}
+
 const createTable = () => {
     const table = document.createElement('table')
     const thead = document.createElement('thead')
@@ -17,7 +25,7 @@ const createTable = () => {
     table.appendChild(thead)
     const tbody = createTbody()
     table.appendChild(tbody)
-    document.getElementById('principal').innerHTML = ' ';
+    document.getElementById('principal').innerHTML = '';
     document.getElementById('principal').appendChild(table)
 }
 
@@ -47,16 +55,22 @@ const createRow = (client) => {
         <td>${status}</td>
     `
     const td = document.createElement('td')
-    const button = document.createElement('button')
-    button.type = 'submit'
-    button.innerText = 'Editar'
-    button.classList.add("button-edit")
-    button.addEventListener('click', function(event){
+    const edit = createButton('button-edit','submit', 'Editar')
+    const view = createButton('button-view','submit', 'Ver')
+   
+    edit.addEventListener('click', function(event){
         event.preventDefault()
         generateFormEdit(client.cpf)
     })
+
+    view.addEventListener('click', function(event){
+        event.preventDefault()
+        alert('Funcionando')
+    })
+
     if(client.status == true){
-        td.append(button)
+        td.append(edit)
+        td.append(view)
     } else{
         const non = document.createElement('a')
         non.innerHTML = "---"
@@ -66,8 +80,27 @@ const createRow = (client) => {
     return newRow
 }
 
+const viewClient = (client) => {
+    const div = document.querySelector('#principal')
+    div.innerHTML = `
+        <div class='client-view'>
+                <h4> Dados do cliente: </h4>
+                <p> Nome:${client.name} Cpf:${client.cpf} RG: ${client.rg}</p>
+                <p> Data de Nascimento:${client.birth_date} Idade: ${client.age} Estado Civil: ${client.marital_status} Sexo: ${client.sexo}</p>
+                <p> Escolaridade: ${client.schooling} Telefone: ${client.phone} Email: ${client.email} </p>
+                <p> Endereço: ${client.address} Bairro: ${client.district} Nº ${client.number} Cidade: ${client.city} UF: ${client.uf}</p>
+                <p> Ocupação profissional: ${client.professional_occupation} Cargo: ${client.office} Renda mensal: ${client.income}</p>
+
+                <h4> Dados da conta: </h4>
+                <p> Número: ${client.account.number} Tipo: ${client.account.type} Saldo: ${client.account.saldo} status: ${client.status} </p>
+                
+        </div>
+    `
+
+}
+
+
 const listClients = () => {
-    
     createTable()
 }
 

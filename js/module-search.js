@@ -67,15 +67,18 @@ const createRowSearch = (client) => {
       <td>${client.status}</td>
     `
     const td = document.createElement('td')
-    const button = document.createElement('button')
-    button.type = 'submit'
-    button.innerText = 'Editar'
-    button.classList.add("button-edit")
-    button.addEventListener('click', function(event){
+    const edit = createButton('button-edit','submit','Editar')
+    const view = createButton('button-view','submit', 'Ver')
+    edit.addEventListener('click', function(event){
         event.preventDefault()
         generateFormEdit(client.cpf)
     })
-    td.append(button)
+    view.addEventListener('click', function(event){
+      event.preventDefault()
+      alert('Funcionando')
+    })
+    td.append(edit)
+    td.append(view)
     newRow.append(td)
     return newRow
   }
@@ -116,7 +119,7 @@ const searchClients = () => {
     alert('Preencha o campo com seu CPF usando "." e "-"  Ex: 123.456.789-10')
   }else{
     dbClient.forEach(client => {
-      if(cpf == client.cpf & client.status == "Ativo"){
+      if(cpf == client.cpf & client.status == true){
         cont += 1;
       }
     });
