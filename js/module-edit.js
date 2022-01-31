@@ -3,17 +3,20 @@ const generateFormEdit = (cpf) => {
     const index = getClient(cpf)
     const dbClient = readClient()
     const client = dbClient[index]
-    console.log(client)
     document.querySelector('#name-field').value = client.name
     document.querySelector('#cpf-field').value = client.cpf
+    document.querySelector('#cpf-field').setAttribute('disabled', 'disabled')
     document.querySelector('#rg-field').value = client.rg
+    document.querySelector('#rg-field').setAttribute('disabled', 'disabled')
     document.querySelector('#dt-field').value = client.birth_date
+    document.querySelector('#age-field').value = client.age
     document.querySelector('#ms-field').value = client.marital_status
     document.querySelector('#sexo-field').value = client.sexo
     document.querySelector('#type-field').value = client.type_conta
     document.querySelector('#schooling-field').value = client.schooling
     document.querySelector('#phone-field').value = client.phone
     document.querySelector('#email-field').value = client.email
+    document.querySelector('#type-field').value = client.account.type
     document.querySelector('#address-field').value = client.address
     document.querySelector('#district-field').value = client.district
     document.querySelector('#number-field').value = client.number

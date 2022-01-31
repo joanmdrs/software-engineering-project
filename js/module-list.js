@@ -1,12 +1,42 @@
-const createButton = (classe, type, text) => {
+const createButton = (classe, type, icon) => {
     const button = document.createElement('button')
     button.type = type
     button.classList.add(classe)
-    button.innerText = text
+    button.innerHTML = icon
     return button
 }
 
-const createTable = () => {
+const createButtonType = (client, action) => {
+
+    if(action == 'view'){
+        const view = createButton('button-view', 'submit', `<i class="far fa-eye"></i>`)
+        view.addEventListener('click', function(event){
+            event.preventDefault()
+            viewClient(client)
+        })
+        return view 
+
+    }else if(action == 'edit'){
+        const edit = createButton('button-edit', 'submit', `<i class="fas fa-edit"></i>`)
+        edit.addEventListener('click', function(event){
+            event.preventDefault()
+            generateFormEdit(client.cpf)
+        })
+        return edit 
+
+    }else{
+        const desative = createButton('button-desative', 'submit', `<i class="fas fa-user-times"></i>`)
+        desative.addEventListener('click', function(event){
+            event.preventDefault()
+            deactivateClient(client.cpf)
+        })
+        return desative 
+        
+    }
+}
+
+
+const createTable = (tbody) => {
     const table = document.createElement('table')
     const thead = document.createElement('thead')
     thead.innerHTML = `
@@ -23,15 +53,13 @@ const createTable = () => {
         </tr>
     `
     table.appendChild(thead)
-    const tbody = createTbody()
     table.appendChild(tbody)
     document.getElementById('principal').innerHTML = '';
     document.getElementById('principal').appendChild(table)
 }
 
-const createTbody = () => {
+const createTbody = (dbClient) => {
     const tbody = document.createElement('tbody')
-    const dbClient = readClient()
     dbClient.forEach(client => {
         let tr = createRow(client)
         tbody.appendChild(tr)
@@ -54,24 +82,16 @@ const createRow = (client) => {
         <td>${client.account.type}</td>
         <td>${status}</td>
     `
-    const td = document.createElement('td')
-    const edit = createButton('button-edit','submit', 'Editar')
-    const view = createButton('button-view','submit', 'Ver')
-   
-    edit.addEventListener('click', function(event){
-        event.preventDefault()
-        generateFormEdit(client.cpf)
-    })
 
-    view.addEventListener('click', function(event){
-        event.preventDefault()
-        alert('Funcionando')
-    })
+    const td = document.createElement('td')
+    const data_action = document.querySelector('#principal').dataset.action
+    const type = data_action == 'edit' ? createButtonType(client, 'edit') : createButtonType(client, 'desative')
+    const view = createButtonType(client, 'view')
 
     if(client.status == true){
-        td.append(edit)
+        td.append(type)
         td.append(view)
-    } else{
+    }else{
         const non = document.createElement('a')
         non.innerHTML = "---"
         td.append(non)
@@ -80,29 +100,15 @@ const createRow = (client) => {
     return newRow
 }
 
-const viewClient = (client) => {
-    const div = document.querySelector('#principal')
-    div.innerHTML = `
-        <div class='client-view'>
-                <h4> Dados do cliente: </h4>
-                <p> Nome:${client.name} Cpf:${client.cpf} RG: ${client.rg}</p>
-                <p> Data de Nascimento:${client.birth_date} Idade: ${client.age} Estado Civil: ${client.marital_status} Sexo: ${client.sexo}</p>
-                <p> Escolaridade: ${client.schooling} Telefone: ${client.phone} Email: ${client.email} </p>
-                <p> Endereço: ${client.address} Bairro: ${client.district} Nº ${client.number} Cidade: ${client.city} UF: ${client.uf}</p>
-                <p> Ocupação profissional: ${client.professional_occupation} Cargo: ${client.office} Renda mensal: ${client.income}</p>
-
-                <h4> Dados da conta: </h4>
-                <p> Número: ${client.account.number} Tipo: ${client.account.type} Saldo: ${client.account.saldo} status: ${client.status} </p>
-                
-        </div>
-    `
-
-}
-
 
 const listClients = () => {
-    createTable()
+    const dbClient = readClient()
+    const tbody = createTbody(dbClient)
+    createTable(tbody)
 }
 
-document.querySelector('#list-clients')
-    .addEventListener('click', listClients)
+document.querySelector('#list-clients').addEventListener('click', function(event){
+    event.preventDefault()
+    document.querySelector('#principal').dataset.action = 'edit'
+    listClients()
+})
