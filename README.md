@@ -13,7 +13,7 @@ O projeto se trata de uma simulação do que seria o registro de clientes de uma
 - Visual Studio Code instalado
 - Extensão Live Server instalada
 
-## Executando
+### Executando
 - Ter baixado a pasta com o projeto
 - Abrir a pasta no Visual Studio Code
 - Clicar com o botão direito em cima do arquivo (index.html) e selecionar a opção (Open With Live Server)
@@ -23,7 +23,7 @@ O projeto se trata de uma simulação do que seria o registro de clientes de uma
 - [Ter o node instalado](https://nodejs.org/pt-br/)
 - Instalar o live-server utilizando o comando (npm install -g live-server) no terminal
 
-### Executado
+### Executando
 - Abre o terminal do sistema operacional
 - Abre a pasta do projeto no terminal
 - Digita live-server e a execução será aberta no seu navegador
