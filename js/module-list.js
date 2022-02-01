@@ -9,7 +9,7 @@ const createButton = (classe, type, icon) => {
 const createButtonType = (client, action) => {
 
     if(action == 'view'){
-        const view = createButton('button-view', 'submit', `<i class="far fa-eye"></i>`)
+        const view = createButton('button-view', 'submit', `<i class="fa fa-eye" style="font-size:18px;"></i>`)
         view.addEventListener('click', function(event){
             event.preventDefault()
             viewClient(client)
@@ -17,7 +17,8 @@ const createButtonType = (client, action) => {
         return view 
 
     }else if(action == 'edit'){
-        const edit = createButton('button-edit', 'submit', `<i class="fas fa-edit"></i>`)
+    
+        const edit = createButton('button-edit', 'submit', `<i class="fa fa-edit" style="font-size:18px;"></i>`)
         edit.addEventListener('click', function(event){
             event.preventDefault()
             generateFormEdit(client.cpf)
@@ -25,7 +26,7 @@ const createButtonType = (client, action) => {
         return edit 
 
     }else{
-        const desative = createButton('button-desative', 'submit', `<i class="fas fa-user-times"></i>`)
+        const desative = createButton('button-desative', 'submit', `<i class="fa fa-close" style="font-size:18px;"></i>`)
         desative.addEventListener('click', function(event){
             event.preventDefault()
             deactivateClient(client.cpf)
