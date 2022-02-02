@@ -1,12 +1,12 @@
 const generateFormSearch = () => {
   document.getElementById('principal').innerHTML = `
-    <form id='client-search-form' class='client-add-form'>  
+    <form id='client-search-form' class='form'>  
         <label>CPF:</label>     
         <div class="input">
             <input class='field' type='text' id='cpf-field' placeholder='XXX.XXX.XXX-XX' required>
         </div>
 
-        <div class="button-save-cancel-clear">
+        <div class="buttons-actions">
             <button id='button-clear' class="button-clear" type="button" onClick='clearFields()'>Limpar</button>
             <button id='button-cancel' class="button-cancel" type="button" onClick='closeForm()'>Cancelar</button>
             <button id='button-search' class="button-search" type="button" onClick='searchClient()'>Buscar</button>
@@ -50,9 +50,6 @@ const returnClient = (client) => {
   createTable(tbody)
 }
 
-const viewClient = () => {
-  alert('Testando')
-}
 
 document.querySelector('#search-client').addEventListener('click', function(event){
     event.preventDefault()

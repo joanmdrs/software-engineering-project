@@ -5,7 +5,7 @@ const setLocalStorage = (dbclient) => localStorage.setItem('db_client',  JSON.st
 const generateFormAdd = () => {
     const div = document.getElementById('principal')
     div.innerHTML = `
-        <form id='client-add-form' class='client-add-form' data-action='new'>
+        <form id='client-add-form' class='form' data-action='new'>
                 
             <div class="label">
                 <label style="margin-right: 230px;">Nome completo:</label>
@@ -26,7 +26,7 @@ const generateFormAdd = () => {
             </div>
             <div class="input">
                 <input class='field' type="date" id='dt-field' placeholder='Data Nascimento' onChange='setAgeField()' required>
-                <input class='field' id='age-field' disabled>
+                <input class='field' id='age-field'>
                 <select class='field' id='ms-field' required>
                     <option disabled selected>-- Escolha uma opção</option>
                     <option value="Solteiro (a)">Solteiro (a)</option>
@@ -130,7 +130,7 @@ const generateFormAdd = () => {
                 <input class='field' type="text" id='office-field' required>
                 <input class='field' type='number' id='income-field' step="0.01" required>
             </div>
-            <div class="button-save-cancel-clear">
+            <div class="buttons-actions" >
                 <button id='button-clear' class="button-clear" type="button" onClick='clearFields()'>Limpar</button>
                 <button id='button-cancel' class="button-cancel" type="button" onClick='closeForm()'>Cancelar</button>
                 <button id='button-save' class="button-save" type="button" onClick='saveClient()'>Salvar</button>
@@ -211,7 +211,7 @@ const saveClient = () => {
 const setAgeField = () => {
     const dt = document.querySelector('#dt-field').value 
     const age = getAge(dt)
-    document.querySelector('#age-field').value = age
+    document.querySelector('#age-field').value = age + ' anos'
 
 }
 const getAge = (data) => {
