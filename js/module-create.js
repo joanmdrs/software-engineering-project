@@ -61,7 +61,7 @@ const generateFormAdd = () => {
 
                 </select>
                 <input class='field' type='text' id='phone-field' placeholder='(00) 00000-0000' required>
-                <input class='field' type="email" id='email-field' placeholder='E-mail ' required>
+                <input class='field' type="email" id='email-field' placeholder='xxx@xxx.xx ' required>
 
                 <select class='field' id='type-field' required>
                     <option disabled selected>-- Escolha uma opção</option>
@@ -77,7 +77,7 @@ const generateFormAdd = () => {
                 <label>Número:</label>
             </div>
             <div class="input">
-                <input class='field' type="text" id="address-field" required>
+                <input class='field' type="text" id="address-field" placeholder='Rua, Avenida...' required>
                 <input class='field' type="text" id='district-field' required>
                 <input class='field' type="number" id='number-field' required>
             </div>
@@ -142,6 +142,76 @@ const isValidFields = () => {
     return document.querySelector('#client-add-form').reportValidity()
 }
 
+const validFields = () => {
+    if(isValidFields()){
+        const name = document.querySelector('#name-field').value;
+        const testeNum = /[0-9]/g;
+        const foundName = name.match(testeNum);
+        if(foundName != null){
+            if(foundName.length >= 1){
+                return 2
+            }
+        }
+
+        const cpf = document.querySelector('#cpf-field').value;
+        console.log(cpf.length)
+        const testeString = /[A-Za-z]/g;
+        const foundCPF = cpf.match(testeString);
+        if(foundCPF != null){
+            if((foundCPF.length >= 1)){
+                return 3
+            }
+        } 
+        if(cpf.length < 14){
+            return 3  
+        }
+
+        const rg = document.querySelector('#rg-field').value;
+        const foundRG = rg.match(testeString);
+        if(foundRG != null){
+            if(foundRG.length >= 1){
+                return 4
+            }
+        }
+        if(rg.length < 7){
+            return 4
+        }
+
+        const age = document.querySelector('#age-field').value;
+        const ageInt = parseInt(age.substring(0,2))
+        if(ageInt < 18){
+            return 5
+        }
+
+        const phone = document.querySelector('#phone-field').value;
+        const foundPhone = phone.match(testeString);
+        if(foundPhone != null){
+            if(foundPhone.length >= 1){
+                return 6
+            }
+        }
+        if(phone.length < 11){
+            return 6
+        }
+        
+
+        const cep = document.querySelector('#cep-field').value;
+        const foundCEP = cep.match(testeString);
+        if(foundCEP != null){
+            if(foundCEP.length >= 1){
+                return 7
+            }
+        }
+        if(cep.length < 8){
+            return 7
+        }
+        
+        return 1
+    } else{
+        return 0
+    }
+}
+
 const createClient = (client) => {
     const dbclient = getLocalStorage()
     dbclient.push(client)
@@ -150,7 +220,7 @@ const createClient = (client) => {
 
 const saveClient = () => {
 
-    if(isValidFields()){
+    if(validFields() == 1){
         const account = createAccount()
         const client = {
             name: document.querySelector('#name-field').value,
@@ -201,8 +271,20 @@ const saveClient = () => {
             closeForm()
         }
         
-    }else {
-        alert("Preencha os campos corretamente")
+    } else if(validFields() == 2){
+        alert('Informe um nome válido!')
+    } else if(validFields() == 3){
+        alert('Informe um CPF válido!')
+    } else if(validFields() == 4){
+        alert('Informe um RG válido!')
+    } else if(validFields() == 5){
+        alert('Cliente menor de idade, cadastro cancelado!')
+    } else if(validFields() == 6){
+        alert('Informe um telefone válido!')
+    } else if(validFields() == 7){
+        alert('Informe um CEP válido!')
+    } else if(validFields() == 0){
+        alert('Prencha todos os campos!')
     }
 }
 
