@@ -14,7 +14,7 @@ const generateFormAdd = () => {
             </div>
             
             <div class="input">
-                <input class='field' type='text' id='name-field' placeholder='Informe seu nome' style="width: 430px;" required>
+                <input class='field' type='text' id='name-field' placeholder='Ex. João da Silva' style="width: 430px;" required>
                 <input class='field' type='text' id='cpf-field' placeholder='XXX.XXX.XXX-XX' maxlength='14' required>
                 <input class='field' type='text' id='rg-field' placeholder='Informe seu RG' required>
             </div>
@@ -26,7 +26,7 @@ const generateFormAdd = () => {
             </div>
             <div class="input">
                 <input class='field' type="date" id='dt-field' placeholder='Data Nascimento' onChange='setAgeField()' required>
-                <input class='field' id='age-field'>
+                <input class='field' id='age-field' placeholder='Não preencha'>
                 <select class='field' id='ms-field' required>
                     <option disabled selected>-- Escolha uma opção</option>
                     <option value="Solteiro (a)">Solteiro (a)</option>
@@ -77,9 +77,9 @@ const generateFormAdd = () => {
                 <label>Número:</label>
             </div>
             <div class="input">
-                <input class='field' type="text" id="address-field" placeholder='Rua, Avenida...' required>
-                <input class='field' type="text" id='district-field' required>
-                <input class='field' type="number" id='number-field' required>
+                <input class='field' type="text" id="address-field" placeholder='Ex. Rua, Avenida...' required>
+                <input class='field' type="text" id='district-field' placeholder='Ex. Bairro ...' required>
+                <input class='field' type="number" id='number-field' placeholder='Ex. 41' required>
             </div>
             <div class="label">
                 <label>CEP:</label>
@@ -87,8 +87,8 @@ const generateFormAdd = () => {
                 <label>UF:</label>
             </div>
             <div class="input">
-                <input class='field' type="text" id='cep-field' required>
-                <input class='field' type="text" id='city-field' required>
+                <input class='field' type="text" id='cep-field' placeholder='Ex. 59300-000' required>
+                <input class='field' type="text" id='city-field' placeholder='Ex. Caicó' required>
                 <select class="field" id="uf-field" required>
                     <option disabled selected>-- Escolha uma opção</option>
                     <option value="AC">Acre</option>
@@ -126,9 +126,9 @@ const generateFormAdd = () => {
                 <label>Salário:</label>
             </div>
             <div class="input">
-                <input class='field' type="text" id='po-field' required>
-                <input class='field' type="text" id='office-field' required>
-                <input class='field' type='number' id='income-field' step="0.01" required>
+                <input class='field' type="text" id='po-field' placeholder='Ex. Funcionário público' required>
+                <input class='field' type="text" id='office-field' placeholder='Ex. Professor' required>
+                <input class='field' type='number' id='income-field' step="0.01" placeholder='0,00' required>
             </div>
             <div class="buttons-actions" >
                 <button id='button-clear' class="button-clear" type="button" onClick='clearFields()'>Limpar</button>

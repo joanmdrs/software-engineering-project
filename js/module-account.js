@@ -28,7 +28,7 @@ const decideServices = (type) => {
     }
 }
 
-const generateNumberAccount = () => Math.round(Math.random() * 100000)
+const generateNumberAccount = () => Math.round(Math.random() * 1000000)
 
 const calcChequeEspecial = (income) => (income*0.3).toFixed(2)
 

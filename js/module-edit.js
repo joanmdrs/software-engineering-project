@@ -17,6 +17,7 @@ const generateFormEdit = (cpf) => {
     document.querySelector('#phone-field').value = client.phone
     document.querySelector('#email-field').value = client.email
     document.querySelector('#type-field').value = client.account.type
+    document.querySelector('#type-field').setAttribute('disabled', 'disabled')
     document.querySelector('#address-field').value = client.address
     document.querySelector('#district-field').value = client.district
     document.querySelector('#number-field').value = client.number
